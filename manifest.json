@@ -6,7 +6,8 @@
   "permissions": [
     "activeTab",
     "scripting",
-    "storage"
+    "storage",
+    "contextMenus"
   ],
   "host_permissions": [
     "*://*.um5.ac.ma/*",
@@ -20,7 +21,8 @@
       "css": ["styles.css"],
       "run_at": "document_start"
     }
-  ],  "background": {
+  ],
+  "background": {
     "service_worker": "background.js"
   },
   "action": {

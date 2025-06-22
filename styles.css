@@ -1,17 +1,18 @@
-/* Enhanced eTU UM5 Portal - Modern UI Styles */
+/* Enhanced eTU UM5 Portal - Ultra Modern UI Styles */
 
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+/* Import Premium Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
-/* Root Variables for Theme System */
+/* Root Variables for Premium Theme System */
 :root {
-  /* Light Theme Colors */
-  --primary-color: #2563eb;
-  --primary-hover: #1d4ed8;
-  --secondary-color: #64748b;
+  /* Premium Light Theme Colors */
+  --primary-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --primary-solid: #667eea;
+  --primary-hover: #5a6fd8;
+  --secondary-color: #6366f1;
   --accent-color: #f59e0b;
-  --success-color: #10b981;
-  --warning-color: #f59e0b;
+  --success-color: #22c55e;
+  --warning-color: #fbbf24;
   --error-color: #ef4444;
   
   /* Background Colors */

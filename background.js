@@ -153,41 +153,21 @@ function handleUpdateMigration() {
     });
 }
 
-// Context menu setup (optional)
-chrome.runtime.onInstalled.addListener(() => {
-    chrome.contextMenus.create({
-        id: 'enhancedETU',
-        title: 'Enhanced eTU Portal',
-        contexts: ['page']
-    });
-    
-    chrome.contextMenus.create({
-        id: 'toggleTheme',
-        parentId: 'enhancedETU',
-        title: 'Toggle Theme',
-        contexts: ['page']
-    });
-    
-    chrome.contextMenus.create({
-        id: 'openPortal',
-        parentId: 'enhancedETU',
-        title: 'Open UM5 Portal',
-        contexts: ['page']
-    });
-});
+// Context menu setup would go here but is disabled to prevent API errors
+// We keep this comment as placeholder for future implementation
 
-// Handle context menu clicks
-chrome.contextMenus.onClicked.addListener((info, tab) => {
-    switch (info.menuItemId) {
-        case 'toggleTheme':
-            chrome.tabs.sendMessage(tab.id, { action: 'toggleTheme' });
-            break;
-            
-        case 'openPortal':
-            openPortalTab();
-            break;
-    }
-});
+// Handle context menu clicks - Disabled for now
+// chrome.contextMenus.onClicked.addListener((info, tab) => {
+//     switch (info.menuItemId) {
+//         case 'toggleTheme':
+//             chrome.tabs.sendMessage(tab.id, { action: 'toggleTheme' });
+//             break;
+//             
+//         case 'openPortal':
+//             openPortalTab();
+//             break;
+//     }
+// });
 
 // Handle extension icon click (alternative to popup)
 chrome.action.onClicked.addListener((tab) => {
