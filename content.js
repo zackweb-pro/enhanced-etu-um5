@@ -7,26 +7,25 @@
     // Configuration
     let currentTheme = 'light';
     let currentGradient = 'gradient-1';
-    let isEnabled = true;
-      // Service definitions with better icons and real extracted text
+    let isEnabled = true;    // Service definitions with Lucide icons and real extracted text
     const serviceDefinitions = {
         // MON PROFIL ÉTUDIANT section
         'profil': [
             {
                 icon: '👤',
-                iconClass: 'fas fa-user-circle',
+                lucideIcon: 'user-circle',
                 title: 'Informations Personnelles',
                 description: 'Gérez vos informations personnelles et académiques'
             },
             {
                 icon: '📝',
-                iconClass: 'fas fa-edit',
+                lucideIcon: 'edit-3',
                 title: 'Inscription Administrative',
                 description: 'Complétez votre inscription administrative'
             },
             {
                 icon: '📋',
-                iconClass: 'fas fa-file-contract',
+                lucideIcon: 'file-text',
                 title: 'Contrat Pédagogique',
                 description: 'Consultez et validez votre contrat pédagogique'
             }
@@ -35,25 +34,25 @@
         'scolarite': [
             {
                 icon: '📜',
-                iconClass: 'fas fa-certificate',
+                lucideIcon: 'award',
                 title: 'Attestation d\'Inscription',
                 description: 'Téléchargez votre attestation d\'inscription'
             },
             {
                 icon: '🏆',
-                iconClass: 'fas fa-trophy',
+                lucideIcon: 'trophy',
                 title: 'Attestation de Réussite',
                 description: 'Attestation de réussite aux examens'
             },
             {
                 icon: '📊',
-                iconClass: 'fas fa-chart-line',
+                lucideIcon: 'bar-chart-3',
                 title: 'Relevé de Notes',
                 description: 'Consultez vos relevés de notes officiels'
             },
             {
                 icon: '📈',
-                iconClass: 'fas fa-graduation-cap',
+                lucideIcon: 'trending-up',
                 title: 'Notes et Résultats',
                 description: 'Accédez à vos notes et résultats d\'examens'
             }
@@ -62,7 +61,7 @@
         'emploi': [
             {
                 icon: '📅',
-                iconClass: 'fas fa-calendar-alt',
+                lucideIcon: 'calendar',
                 title: 'Mon Emploi du Temps',
                 description: 'Consultez votre planning de cours détaillé'
             }
@@ -71,25 +70,25 @@
         'cours': [
             {
                 icon: '🎓',
-                iconClass: 'fab fa-moodle',
+                lucideIcon: 'graduation-cap',
                 title: 'Moodle',
                 description: 'Plateforme d\'apprentissage en ligne Moodle'
             },
             {
                 icon: '📚',
-                iconClass: 'fas fa-book-open',
+                lucideIcon: 'book-open',
                 title: 'MOOC',
                 description: 'Cours en ligne ouverts et massifs'
             },
             {
                 icon: '💬',
-                iconClass: 'fas fa-video',
+                lucideIcon: 'video',
                 title: 'Google Meet',
                 description: 'Participez aux cours en visioconférence'
             },
             {
                 icon: '👥',
-                iconClass: 'fab fa-microsoft',
+                lucideIcon: 'users',
                 title: 'Microsoft Teams',
                 description: 'Collaboration et communication d\'équipe'
             }
@@ -98,25 +97,25 @@
         'services': [
             {
                 icon: '📧',
-                iconClass: 'fas fa-envelope',
+                lucideIcon: 'mail',
                 title: 'Email',
                 description: 'Accédez à votre messagerie universitaire'
             },
             {
                 icon: '☁️',
-                iconClass: 'fas fa-cloud',
+                lucideIcon: 'cloud',
                 title: 'Stockage',
                 description: 'Espace de stockage cloud universitaire'
             },
             {
                 icon: '📋',
-                iconClass: 'fas fa-tasks',
+                lucideIcon: 'clipboard-list',
                 title: 'Planificateur',
                 description: 'Organisez vos tâches et projets'
             },
             {
                 icon: '✅',
-                iconClass: 'fas fa-check-square',
+                lucideIcon: 'check-square',
                 title: 'To Do',
                 description: 'Gérez votre liste de tâches à faire'
             }
@@ -125,7 +124,7 @@
         'ressources': [
             {
                 icon: '🗄️',
-                iconClass: 'fas fa-database',
+                lucideIcon: 'database',
                 title: 'Base de Données',
                 description: 'Accédez aux ressources numériques de l\'université'
             }
@@ -137,9 +136,8 @@
         
         // Add debug indicator
         addDebugIndicator();
-        
-        // Inject FontAwesome
-        injectFontAwesome();
+          // Inject Lucide Icons
+        injectLucideIcons();
         
         // Load saved preferences
         loadSettings();
@@ -159,59 +157,36 @@
         registerTab();
         
         console.log('Enhanced eTU Portal: Activated successfully!');
-    }
-      // Inject FontAwesome with multiple fallback methods
-    function injectFontAwesome() {
-        // Method 1: Try the provided FontAwesome kit
-        const fontAwesome1 = document.createElement('script');
-        fontAwesome1.src = 'https://kit.fontawesome.com/0a18d87a1d.js';
-        fontAwesome1.crossOrigin = 'anonymous';
+    }    // Inject Lucide Icons (modern, professional, free)
+    function injectLucideIcons() {
+        // Lucide Icons CDN
+        const lucideScript = document.createElement('script');
+        lucideScript.src = 'https://unpkg.com/lucide@latest/dist/umd/lucide.js';
         
-        // Method 2: Fallback to CDN version
-        const fontAwesome2 = document.createElement('link');
-        fontAwesome2.rel = 'stylesheet';
-        fontAwesome2.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
-        fontAwesome2.crossOrigin = 'anonymous';
-        
-        // Method 3: Another CDN fallback
-        const fontAwesome3 = document.createElement('link');
-        fontAwesome3.rel = 'stylesheet';
-        fontAwesome3.href = 'https://pro.fontawesome.com/releases/v5.10.0/css/all.css';
-        fontAwesome3.crossOrigin = 'anonymous';
+        const lucideCSS = document.createElement('link');
+        lucideCSS.rel = 'stylesheet';
+        lucideCSS.href = 'https://unpkg.com/lucide@latest/dist/umd/lucide.css';
         
         const addToHead = () => {
             if (document.head) {
-                document.head.appendChild(fontAwesome1);
-                document.head.appendChild(fontAwesome2);
-                document.head.appendChild(fontAwesome3);
+                document.head.appendChild(lucideCSS);
+                document.head.appendChild(lucideScript);
                 
-                // Add CSS to ensure FontAwesome loads properly
-                const faStyle = document.createElement('style');
-                faStyle.textContent = `
-                    .fa, .fas, .far, .fal, .fab {
-                        font-family: "Font Awesome 5 Free", "Font Awesome 5 Pro", "FontAwesome" !important;
-                        font-weight: 900 !important;
-                        -webkit-font-smoothing: antialiased !important;
-                        display: inline-block !important;
-                        font-style: normal !important;
-                        font-variant: normal !important;
-                        text-rendering: auto !important;
-                        line-height: 1 !important;
+                // Initialize Lucide after loading
+                lucideScript.onload = () => {
+                    if (window.lucide) {
+                        window.lucide.createIcons();
+                        console.log('Lucide Icons loaded successfully');
                     }
-                    .fab {
-                        font-family: "Font Awesome 5 Brands" !important;
-                        font-weight: 400 !important;
-                    }
-                `;
-                document.head.appendChild(faStyle);
+                };
                 
-                console.log('FontAwesome injection attempted with multiple methods');
+                console.log('Lucide Icons injection initiated');
             } else {
                 setTimeout(addToHead, 100);
             }
         };
         addToHead();
-    }    // Enhance service cards with better text extraction and fallback icons
+    }// Enhance service cards with better text extraction and fallback icons
     function enhanceServiceCards() {
         setTimeout(() => {
             const panels = document.querySelectorAll('.panel');
@@ -276,8 +251,7 @@
                         z-index: 1 !important;
                         padding: 1.5rem !important;
                     `;
-                    
-                    // Add icon (with fallback)
+                      // Add icon (Lucide with emoji fallback)
                     const iconElement = document.createElement('div');
                     iconElement.className = 'service-icon';
                     iconElement.style.cssText = `
@@ -290,8 +264,31 @@
                         justify-content: center !important;
                     `;
                     
-                    // Always use emoji as it's more reliable
-                    iconElement.textContent = service.icon;
+                    // Try Lucide icon first, fallback to emoji
+                    if (service.lucideIcon && window.lucide) {
+                        const lucideIcon = document.createElement('i');
+                        lucideIcon.setAttribute('data-lucide', service.lucideIcon);
+                        lucideIcon.style.cssText = 'width: 3rem; height: 3rem; stroke-width: 1.5; color: inherit;';
+                        iconElement.appendChild(lucideIcon);
+                        
+                        // Initialize the specific icon
+                        setTimeout(() => {
+                            if (window.lucide) {
+                                window.lucide.createIcons();
+                            }
+                        }, 100);
+                        
+                        // Fallback to emoji if Lucide doesn't work
+                        setTimeout(() => {
+                            const svgElement = lucideIcon.querySelector('svg');
+                            if (!svgElement) {
+                                lucideIcon.remove();
+                                iconElement.textContent = service.icon;
+                            }
+                        }, 2000);
+                    } else {
+                        iconElement.textContent = service.icon;
+                    }
                     
                     // Add title
                     const titleElement = document.createElement('div');
@@ -461,31 +458,30 @@
         
         return '📎'; // Default icon
     }
-    
-    // Helper function to get FontAwesome icon class based on text content
-    function getFontAwesomeIconForText(text) {
+      // Helper function to get Lucide icon based on text content
+    function getLucideIconForText(text) {
         const textLower = text.toLowerCase();
         
-        if (textLower.includes('profil') || textLower.includes('personnel')) return 'fas fa-user-circle';
-        if (textLower.includes('inscription')) return 'fas fa-edit';
-        if (textLower.includes('contrat') || textLower.includes('pédagogique')) return 'fas fa-file-contract';
-        if (textLower.includes('attestation') && textLower.includes('inscription')) return 'fas fa-certificate';
-        if (textLower.includes('attestation') && textLower.includes('réussite')) return 'fas fa-trophy';
-        if (textLower.includes('relevé') || textLower.includes('notes')) return 'fas fa-chart-line';
-        if (textLower.includes('résultats')) return 'fas fa-graduation-cap';
-        if (textLower.includes('emploi') || textLower.includes('temps')) return 'fas fa-calendar-alt';
-        if (textLower.includes('moodle')) return 'fab fa-moodle';
-        if (textLower.includes('mooc')) return 'fas fa-book-open';
-        if (textLower.includes('google') || textLower.includes('meet')) return 'fas fa-video';
-        if (textLower.includes('microsoft') || textLower.includes('teams')) return 'fab fa-microsoft';
-        if (textLower.includes('email') || textLower.includes('mail')) return 'fas fa-envelope';
-        if (textLower.includes('stockage') || textLower.includes('cloud')) return 'fas fa-cloud';
-        if (textLower.includes('planificateur')) return 'fas fa-tasks';
-        if (textLower.includes('todo') || textLower.includes('do')) return 'fas fa-check-square';
-        if (textLower.includes('base') || textLower.includes('données')) return 'fas fa-database';
-        if (textLower.includes('actualité') || textLower.includes('news')) return 'fas fa-bullhorn';
+        if (textLower.includes('profil') || textLower.includes('personnel')) return 'user-circle';
+        if (textLower.includes('inscription')) return 'edit-3';
+        if (textLower.includes('contrat') || textLower.includes('pédagogique')) return 'file-text';
+        if (textLower.includes('attestation') && textLower.includes('inscription')) return 'award';
+        if (textLower.includes('attestation') && textLower.includes('réussite')) return 'trophy';
+        if (textLower.includes('relevé') || textLower.includes('notes')) return 'bar-chart-3';
+        if (textLower.includes('résultats')) return 'trending-up';
+        if (textLower.includes('emploi') || textLower.includes('temps')) return 'calendar';
+        if (textLower.includes('moodle')) return 'graduation-cap';
+        if (textLower.includes('mooc')) return 'book-open';
+        if (textLower.includes('google') || textLower.includes('meet')) return 'video';
+        if (textLower.includes('microsoft') || textLower.includes('teams')) return 'users';
+        if (textLower.includes('email') || textLower.includes('mail')) return 'mail';
+        if (textLower.includes('stockage') || textLower.includes('cloud')) return 'cloud';
+        if (textLower.includes('planificateur')) return 'clipboard-list';
+        if (textLower.includes('todo') || textLower.includes('do')) return 'check-square';
+        if (textLower.includes('base') || textLower.includes('données')) return 'database';
+        if (textLower.includes('actualité') || textLower.includes('news')) return 'megaphone';
         
-        return 'fas fa-external-link-alt'; // Default icon
+        return 'external-link'; // Default icon
     }
     
     // Helper function to generate description based on text content
@@ -910,12 +906,11 @@
         const addToBody = () => {
             if (document.body) {
                 document.body.appendChild(indicator);
-                
-                // Update status after enhancement
+                  // Update status after enhancement
                 setTimeout(() => {
                     const serviceCards = document.querySelectorAll('.service-card-content').length;
-                    const faIcons = document.querySelectorAll('.service-icon i').length;
-                    indicator.textContent = `Enhanced: ${serviceCards} cards, ${faIcons} FA icons (Click for debug)`;
+                    const lucideIcons = document.querySelectorAll('[data-lucide]').length;
+                    indicator.textContent = `Enhanced: ${serviceCards} cards, ${lucideIcons} Lucide icons (Click for debug)`;
                     
                     if (serviceCards > 0) {
                         indicator.style.background = 'var(--success-color)';

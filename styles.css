@@ -113,12 +113,26 @@ html, body {
   scroll-behavior: smooth !important;
 }
 
-/* CONTAINER OVERRIDE */
+/* CONTAINER OVERRIDE - FULL WIDTH */
 .container, .container-fluid {
-  max-width: 1400px !important;
-  margin: 0 auto !important;
-  padding: var(--spacing-xl) var(--spacing-lg) !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: var(--spacing-xl) var(--spacing-2xl) !important;
   background: transparent !important;
+}
+
+/* Responsive padding for full width */
+@media (min-width: 1400px) {
+  .container, .container-fluid {
+    padding: var(--spacing-xl) var(--spacing-3xl) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .container, .container-fluid {
+    padding: var(--spacing-md) var(--spacing-lg) !important;
+  }
 }
 
 /* HIDE OLD BANNER AND CREATE ULTRA MODERN HEADER */
@@ -446,21 +460,31 @@ img[src*="css/images/"] {
   color: var(--primary-solid) !important;
 }
 
-/* FontAwesome Icons and Descriptions */
+/* Lucide Icons and Professional Styling */
 .service-icon {
   font-size: 3rem !important;
   margin-bottom: var(--spacing-lg) !important;
-  display: block !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   color: var(--primary-solid) !important;
   position: relative !important;
   z-index: 1 !important;
   transition: all 0.3s ease !important;
 }
 
-.service-icon i {
-  font-size: inherit !important;
+.service-icon i[data-lucide] {
+  width: 3rem !important;
+  height: 3rem !important;
+  stroke-width: 1.5 !important;
   color: inherit !important;
-  display: block !important;
+}
+
+.service-icon svg {
+  width: 3rem !important;
+  height: 3rem !important;
+  stroke: currentColor !important;
+  stroke-width: 1.5 !important;
 }
 
 .service-title {
@@ -502,7 +526,11 @@ img[src*="css/images/"] {
 .panel-body a:hover .service-icon {
   transform: scale(1.15) rotate(-5deg) !important;
   color: var(--text-white) !important;
-  text-shadow: 0 4px 8px rgba(0,0,0,0.3) !important;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)) !important;
+}
+
+.panel-body a:hover .service-icon svg {
+  stroke: var(--text-white) !important;
 }
 
 .panel-body a:hover .service-title {
@@ -514,28 +542,6 @@ img[src*="css/images/"] {
   color: rgba(255,255,255,0.9) !important;
   transform: translateY(-1px) !important;
 }
-
-/* Ensure FontAwesome icons display properly */
-.fa, .fas, .far, .fal, .fab {
-  font-family: "Font Awesome 5 Free", "Font Awesome 5 Pro", "FontAwesome" !important;
-  font-weight: 900 !important;
-  -webkit-font-smoothing: antialiased !important;
-  display: inline-block !important;
-  font-style: normal !important;
-  font-variant: normal !important;
-  text-rendering: auto !important;
-  line-height: 1 !important;
-}
-
-.fab {
-  font-family: "Font Awesome 5 Brands" !important;
-  font-weight: 400 !important;
-}
-
-/* Specific brand icons */
-.fa-moodle:before { content: "🎓"; }
-.fa-microsoft:before { content: "👥"; }
-.fa-google:before { content: "💬"; }
 
 /* NEWS SECTION PROFESSIONAL STYLING */
 .panel:has(.panel-heading:contains("NEUF")) .panel-body a,
