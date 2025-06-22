@@ -71,6 +71,9 @@ class EnhancedETUPortal {
         // Apply theme
         document.documentElement.setAttribute('data-theme', this.theme);
         
+        // Create and add theme toggle button
+        this.createThemeToggle();
+        
         // Add enhanced classes and functionality
         this.enhanceNavigation();
         this.enhanceCards();
@@ -331,34 +334,24 @@ class EnhancedETUPortal {
         `;
 
         document.body.appendChild(toolbar);
-    }
+    }    createThemeToggle() {
+        // Remove existing theme toggle if it exists
+        const existingToggle = document.querySelector('.theme-toggle');
+        if (existingToggle) {
+            existingToggle.remove();
+        }
 
-    createThemeToggle() {
         const themeToggle = document.createElement('button');
-        themeToggle.className = 'theme-toggle-btn';
+        themeToggle.className = 'theme-toggle';
         themeToggle.innerHTML = this.theme === 'light' ? '🌙' : '☀️';
-        themeToggle.title = 'Changer le thème';
-        themeToggle.style.cssText = `
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            cursor: pointer;
-            box-shadow: var(--shadow-md);
-            transition: all 0.3s ease;
-        `;
+        themeToggle.title = 'Changer le thème (Light/Dark)';
+        themeToggle.setAttribute('aria-label', 'Toggle theme');
 
-        themeToggle.addEventListener('click', () => this.toggleTheme());
+        themeToggle.addEventListener('click', () => {
+            this.toggleTheme();
+            themeToggle.innerHTML = this.theme === 'light' ? '🌙' : '☀️';
+        });
+        
         document.body.appendChild(themeToggle);
     }
 
@@ -423,19 +416,24 @@ class EnhancedETUPortal {
                 window.scrollTo({top: 0, behavior: 'smooth'});
             }
         });
-    }
-
-    toggleTheme() {
+    }    toggleTheme() {
         this.theme = this.theme === 'light' ? 'dark' : 'light';
         document.documentElement.setAttribute('data-theme', this.theme);
         
-        const themeToggle = document.querySelector('.theme-toggle-btn');
+        // Update theme toggle button
+        const themeToggle = document.querySelector('.theme-toggle');
         if (themeToggle) {
             themeToggle.innerHTML = this.theme === 'light' ? '🌙' : '☀️';
         }
         
         this.savePreferences();
         this.showNotification(`Thème ${this.theme === 'light' ? 'clair' : 'sombre'} activé`, 'success');
+        
+        // Update popup theme toggle as well
+        chrome.runtime.sendMessage({
+            action: 'themeChanged',
+            theme: this.theme
+        });
     }
 
     toggleExtension() {
