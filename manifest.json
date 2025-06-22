@@ -13,13 +13,12 @@
     "*://*.um5.ac.ma/*",
     "*://localhost/*",
     "*://127.0.0.1/*"
-  ],
-  "content_scripts": [
+  ],  "content_scripts": [
     {
       "matches": ["*://*.um5.ac.ma/*", "*://localhost/*", "*://127.0.0.1/*"],
       "js": ["content.js"],
       "css": ["styles.css"],
-      "run_at": "document_start"
+      "run_at": "document_idle"
     }
   ],
   "background": {

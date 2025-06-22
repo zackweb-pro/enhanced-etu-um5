@@ -339,6 +339,73 @@
                 transform: translateY(0);
             }
         }
+
+        /* Gradient Selector Styles */
+        .gradient-preview {
+            width: 32px;
+            height: 20px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .gradient-preview:hover {
+            transform: scale(1.1);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .gradient-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin: 12px 0;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .gradient-option {
+            width: 36px;
+            height: 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gradient-option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gradient-option:hover::before {
+            opacity: 1;
+        }
+        
+        .gradient-option:hover {
+            transform: scale(1.15);
+            border-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .gradient-option.active {
+            border-color: rgba(255, 255, 255, 0.9);
+            transform: scale(1.1);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -353,14 +420,32 @@
             <div class="status-text">Extension Active</div>
             <div class="status-indicator"></div>
         </div>
-        
-        <div class="controls">
+          <div class="controls">
             <div class="control-item" id="themeToggle">
                 <div class="control-label">
                     <span class="control-icon">🌙</span>
                     <span>Mode Sombre</span>
                 </div>
                 <div class="toggle" id="themeSwitch"></div>
+            </div>
+            
+            <div class="control-item" id="gradientSelector">
+                <div class="control-label">
+                    <span class="control-icon">🎨</span>
+                    <span>Thème Gradient</span>
+                </div>
+                <div class="gradient-preview" id="currentGradient"></div>
+            </div>
+            
+            <div class="gradient-grid" id="gradientGrid" style="display: none;">
+                <div class="gradient-option" data-gradient="gradient-1" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)"></div>
+                <div class="gradient-option" data-gradient="gradient-2" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%)"></div>
+                <div class="gradient-option" data-gradient="gradient-3" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)"></div>
+                <div class="gradient-option" data-gradient="gradient-4" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)"></div>
+                <div class="gradient-option" data-gradient="gradient-5" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%)"></div>
+                <div class="gradient-option" data-gradient="gradient-6" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)"></div>
+                <div class="gradient-option" data-gradient="gradient-7" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)"></div>
+                <div class="gradient-option" data-gradient="gradient-8" style="background: linear-gradient(135deg, #1fa2ff 0%, #12d8fa 0%, #a6ffcb 100%)"></div>
             </div>
             
             <div class="control-item" id="extensionToggle">

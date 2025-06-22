@@ -13,11 +13,9 @@ class PopupController {
         
         // Check if we're on a supported page
         this.checkCurrentTab();
-    }
-
-    async loadSettings() {
+    }    async loadSettings() {
         try {
-            const result = await chrome.storage.sync.get(['theme', 'isEnabled']);
+            const result = await chrome.storage.sync.get(['theme', 'gradient', 'isEnabled']);
             
             // Update theme toggle
             const themeSwitch = document.getElementById('themeSwitch');
@@ -40,6 +38,9 @@ class PopupController {
             } else {
                 extensionSwitch.classList.remove('active');
             }
+            
+            // Load gradient settings
+            await this.loadGradientSettings();
         } catch (error) {
             console.log('Using default settings');
         }
@@ -69,6 +70,19 @@ class PopupController {
         // Help button
         document.getElementById('helpBtn').addEventListener('click', () => {
             this.showHelp();
+        });
+
+        // Gradient selector
+        document.getElementById('gradientSelector').addEventListener('click', () => {
+            this.toggleGradientGrid();
+        });
+        
+        // Gradient options
+        document.querySelectorAll('.gradient-option').forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.selectGradient(option.dataset.gradient);
+            });
         });
     }
 
@@ -322,6 +336,90 @@ class PopupController {
                 notification.remove();
             }, 300);
         }, 2000);
+    }
+
+    toggleGradientGrid() {
+        const gradientGrid = document.getElementById('gradientGrid');
+        const isVisible = gradientGrid.style.display !== 'none';
+        
+        gradientGrid.style.display = isVisible ? 'none' : 'grid';
+        
+        // Add animation
+        if (!isVisible) {
+            gradientGrid.style.opacity = '0';
+            gradientGrid.style.transform = 'translateY(-10px)';
+            
+            setTimeout(() => {
+                gradientGrid.style.transition = 'all 0.3s ease';
+                gradientGrid.style.opacity = '1';
+                gradientGrid.style.transform = 'translateY(0)';
+            }, 10);
+        }
+    }
+    
+    async selectGradient(gradientName) {
+        const gradientMap = {
+            'gradient-1': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            'gradient-2': 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+            'gradient-3': 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+            'gradient-4': 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+            'gradient-5': 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+            'gradient-6': 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+            'gradient-7': 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)',
+            'gradient-8': 'linear-gradient(135deg, #1fa2ff 0%, #12d8fa 0%, #a6ffcb 100%)'
+        };
+        
+        // Update preview
+        const gradientPreview = document.getElementById('currentGradient');
+        gradientPreview.style.background = gradientMap[gradientName];
+        
+        // Update active state
+        document.querySelectorAll('.gradient-option').forEach(option => {
+            option.classList.remove('active');
+        });
+        document.querySelector(`[data-gradient="${gradientName}"]`).classList.add('active');
+        
+        // Save setting
+        await chrome.storage.sync.set({ gradient: gradientName });
+        
+        // Send message to content script
+        this.sendMessageToActiveTab({ 
+            action: 'changeGradient', 
+            gradient: gradientName 
+        });
+        
+        // Hide grid
+        this.toggleGradientGrid();
+        
+        const gradientNumber = gradientName.replace('gradient-', '');
+        this.showNotification(`Thème gradient ${gradientNumber} appliqué!`);
+    }
+    
+    async loadGradientSettings() {
+        try {
+            const result = await chrome.storage.sync.get(['gradient']);
+            const currentGradient = result.gradient || 'gradient-1';
+            
+            const gradientMap = {
+                'gradient-1': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                'gradient-2': 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                'gradient-3': 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+                'gradient-4': 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+                'gradient-5': 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+                'gradient-6': 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+                'gradient-7': 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)',
+                'gradient-8': 'linear-gradient(135deg, #1fa2ff 0%, #12d8fa 0%, #a6ffcb 100%)'
+            };
+            
+            // Update preview
+            const gradientPreview = document.getElementById('currentGradient');
+            gradientPreview.style.background = gradientMap[currentGradient];
+            
+            // Update active state
+            document.querySelector(`[data-gradient="${currentGradient}"]`)?.classList.add('active');
+        } catch (error) {
+            console.log('Using default gradient');
+        }
     }
 }
 
