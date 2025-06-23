@@ -167,7 +167,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### Getting Help
 - **GitHub Issues**: Report bugs and request features
-- **Email**: [Your contact email]
+- **Email**: webzack0@gmail.com
 - **Documentation**: Check this README first
 
 ### FAQ
